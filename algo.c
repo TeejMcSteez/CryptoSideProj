@@ -6,18 +6,16 @@ char encryptAlgo(char in) {
     return in;
 }
 
+char decryptAlgo(char in) {
+    in = in + 1;
+    return in;
+}
+
 int main() {
     #define CHUNK 200
-    char tempBuffer[CHUNK], *input;
-    printf("Please enter the string to be decrypted: ");
-    if (scanf("%s", &tempBuffer) != -1) {
-        
-    } else {
-        printf("String Longer than 200 chars");
-    }
+    char tempBuffer[CHUNK] = {"Hello message"}, *input;
     input = tempBuffer;
 
-    printf("%c", *input);//value at input[0]
     //encrypt
     for (int i = 0; i < sizeof(tempBuffer)/8; i++) {
         if (*input + i != ' ') {
@@ -25,9 +23,18 @@ int main() {
         } else {
             continue;
         }
-    }  
+    }
+    printf("Encrypted: %s\n", input);
+    //decrypt
+    for (int i = 0; i < sizeof(tempBuffer)/8; i++) {
+        if (*input + i != ' ') {
+            *(input + i) = decryptAlgo(*(input + i));
+        } else {
+            continue;
+        }
+    }
 
-    printf("%s", input);
+    printf("Decrypted: %s", input);
 
     return 0;
 }
